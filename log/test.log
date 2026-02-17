@@ -93,3 +93,253 @@ TaskTest: test_task_is_valid_with_a_title
 TaskTest: test_task_is_valid_without_a_description
 --------------------------------------------------
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------------------------------------------
+TasksControllerTest: test_PATCH_/tasks/:id_with_blank_title_renders_unprocessable_entity
+----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:00:45.131550"], ["updated_at", "2026-02-17 07:00:45.131550"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-------------------------------------------------------------
+TasksControllerTest: test_GET_/tasks/:id/edit_returns_success
+-------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:00:45.139362"], ["updated_at", "2026-02-17 07:00:45.139362"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------
+TasksControllerTest: test_GET_/tasks_returns_success
+----------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:00:45.144602"], ["updated_at", "2026-02-17 07:00:45.144602"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-------------------------------------------------------------------------
+TasksControllerTest: test_PATCH_/tasks/:id_updates_the_task_and_redirects
+-------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.9ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:00:45.147997"], ["updated_at", "2026-02-17 07:00:45.147997"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------------------------------
+TasksControllerTest: test_DELETE_/tasks/:id_destroys_the_task_and_redirects
+---------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:00:45.156040"], ["updated_at", "2026-02-17 07:00:45.156040"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+TasksControllerTest - test_DELETE_/tasks/:id_destroys_the_task_and_redirects: NoMethodError raised.
+If you expected this exception, use `assert_raises` as near to the code that raises as possible.
+Other block based assertions (e.g. `assert_difference`) can be used, as long as `assert_raises` is inside their block.
+
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------------------
+TasksControllerTest: test_POST_/tasks_with_blank_title_renders_unprocessable_entity
+-----------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:00:45.169082"], ["updated_at", "2026-02-17 07:00:45.169082"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+TasksControllerTest - test_POST_/tasks_with_blank_title_renders_unprocessable_entity: NameError raised.
+If you expected this exception, use `assert_raises` as near to the code that raises as possible.
+Other block based assertions (e.g. `assert_difference`) can be used, as long as `assert_raises` is inside their block.
+
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------------
+TasksControllerTest: test_POST_/tasks_creates_a_task_and_redirects
+------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:00:45.190227"], ["updated_at", "2026-02-17 07:00:45.190227"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+TasksControllerTest - test_POST_/tasks_creates_a_task_and_redirects: NameError raised.
+If you expected this exception, use `assert_raises` as near to the code that raises as possible.
+Other block based assertions (e.g. `assert_difference`) can be used, as long as `assert_raises` is inside their block.
+
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------
+TasksControllerTest: test_GET_/tasks/new_returns_success
+--------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:00:45.196087"], ["updated_at", "2026-02-17 07:00:45.196087"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------
+TasksControllerTest: test_GET_/tasks/:id_returns_success
+--------------------------------------------------------
+  [1m[36mTRANSACTION (1.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:00:45.207345"], ["updated_at", "2026-02-17 07:00:45.207345"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-------------------------------------------------------------------------
+TasksControllerTest: test_PATCH_/tasks/:id_updates_the_task_and_redirects
+-------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:47.950074"], ["updated_at", "2026-02-17 07:01:47.950074"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/tasks/1" for 127.0.0.1 at 2026-02-17 12:31:47 +0530
+Processing by TasksController#update as HTML
+  Parameters: {"task"=>{"title"=>"Updated title"}, "id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Update (0.4ms)[0m  [1m[33mUPDATE "tasks" SET "title" = ?, "updated_at" = ? WHERE "tasks"."id" = ?[0m  [["title", "Updated title"], ["updated_at", "2026-02-17 07:01:47.993764"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks/1
+Completed 302 Found in 29ms (ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.7ms)
+  [1m[36mTask Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------
+TasksControllerTest: test_GET_/tasks/new_returns_success
+--------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:48.006518"], ["updated_at", "2026-02-17 07:01:48.006518"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/new" for 127.0.0.1 at 2026-02-17 12:31:48 +0530
+Processing by TasksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 2.7ms | GC: 0.2ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 4.2ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.4ms | GC: 1.0ms)
+Completed 200 OK in 19ms (Views: 16.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------------------
+TasksControllerTest: test_POST_/tasks_with_blank_title_renders_unprocessable_entity
+-----------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.2ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:48.033409"], ["updated_at", "2026-02-17 07:01:48.033409"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2026-02-17 12:31:48 +0530
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"title"=>"", "description"=>"Details"}}
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 3.9ms | GC: 0.0ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 4.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 11ms (Views: 7.7ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mCACHE Task Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------
+TasksControllerTest: test_GET_/tasks_returns_success
+----------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:48.060216"], ["updated_at", "2026-02-17 07:01:48.060216"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:31:48 +0530
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  Rendered tasks/index.html.erb within layouts/application (Duration: 2.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 2.9ms | GC: 0.0ms)
+Completed 200 OK in 6ms (Views: 3.6ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-------------------------------------------------------------
+TasksControllerTest: test_GET_/tasks/:id/edit_returns_success
+-------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.1ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:48.101947"], ["updated_at", "2026-02-17 07:01:48.101947"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/1/edit" for 127.0.0.1 at 2026-02-17 12:31:48 +0530
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 4.5ms | GC: 0.0ms)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 5.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.1ms | GC: 0.0ms)
+Completed 200 OK in 9ms (Views: 6.5ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------------------------------------------
+TasksControllerTest: test_PATCH_/tasks/:id_with_blank_title_renders_unprocessable_entity
+----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:48.118999"], ["updated_at", "2026-02-17 07:01:48.118999"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/tasks/1" for 127.0.0.1 at 2026-02-17 12:31:48 +0530
+Processing by TasksController#update as HTML
+  Parameters: {"task"=>{"title"=>""}, "id"=>"1"}
+  [1m[36mTask Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 17.3ms | GC: 0.0ms)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 19.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 21.0ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 24ms (Views: 21.9ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------
+TasksControllerTest: test_GET_/tasks/:id_returns_success
+--------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:48.149885"], ["updated_at", "2026-02-17 07:01:48.149885"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/1" for 127.0.0.1 at 2026-02-17 12:31:48 +0530
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 1.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.8ms | GC: 0.0ms)
+Completed 200 OK in 9ms (Views: 5.4ms | ActiveRecord: 0.7ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------------------------------
+TasksControllerTest: test_DELETE_/tasks/:id_destroys_the_task_and_redirects
+---------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:48.167982"], ["updated_at", "2026-02-17 07:01:48.167982"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started DELETE "/tasks/1" for 127.0.0.1 at 2026-02-17 12:31:48 +0530
+Processing by TasksController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Destroy (0.3ms)[0m  [1m[31mDELETE FROM "tasks" WHERE "tasks"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 15ms (ActiveRecord: 1.1ms (2 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------------
+TasksControllerTest: test_POST_/tasks_creates_a_task_and_redirects
+------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:48.198078"], ["updated_at", "2026-02-17 07:01:48.198078"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2026-02-17 12:31:48 +0530
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"title"=>"New task", "description"=>"Details", "due_date"=>"2026-04-01"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "New task"], ["description", "Details"], ["due_date", "2026-04-01"], ["completed", 0], ["created_at", "2026-02-17 07:01:48.214891"], ["updated_at", "2026-02-17 07:01:48.214891"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 5ms (ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
