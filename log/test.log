@@ -547,3 +547,489 @@ Redirected to http://www.example.com/tasks/1
 Completed 302 Found in 4ms (ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
   [1m[36mTask Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
   [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------
+TasksTest: test_user_creates_a_task_and_sees_it_in_the_list
+-----------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:34:13 +0530
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered tasks/index.html.erb within layouts/application (Duration: 3.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 40.1ms | GC: 23.5ms)
+Completed 200 OK in 70ms (Views: 44.3ms | ActiveRecord: 0.6ms (3 queries, 1 cached) | GC: 23.5ms)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------
+TasksTest: test_user_creates_a_task_and_sees_it_in_the_list
+-----------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:34:32 +0530
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered tasks/index.html.erb within layouts/application (Duration: 5.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 60.3ms | GC: 41.9ms)
+Completed 200 OK in 93ms (Views: 65.5ms | ActiveRecord: 0.7ms (3 queries, 1 cached) | GC: 44.8ms)
+Started GET "/tasks/new" for 127.0.0.1 at 2026-02-17 12:34:33 +0530
+Processing by TasksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 6.6ms | GC: 0.0ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 10.4ms | GC: 1.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 15.3ms | GC: 1.2ms)
+Completed 200 OK in 44ms (Views: 16.4ms | ActiveRecord: 0.6ms (0 queries, 0 cached) | GC: 2.6ms)
+Started POST "/tasks" for 127.0.0.1 at 2026-02-17 12:34:33 +0530
+Processing by TasksController#create as TURBO_STREAM
+  Parameters: {"task"=>{"title"=>"Buy groceries", "description"=>"Milk, eggs, bread", "due_date"=>"60301-02-02"}, "commit"=>"Create Task"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Buy groceries"], ["description", "Milk, eggs, bread"], ["due_date", "60301-02-02"], ["completed", 0], ["created_at", "2026-02-17 07:04:33.824948"], ["updated_at", "2026-02-17 07:04:33.824948"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:35039/tasks
+Completed 302 Found in 7ms (ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:34:33 +0530
+Processing by TasksController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTask Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  Rendered tasks/index.html.erb within layouts/application (Duration: 4.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 18.1ms | GC: 0.0ms)
+Completed 200 OK in 20ms (Views: 18.3ms | ActiveRecord: 0.4ms (4 queries, 1 cached) | GC: 0.0ms)
+Started GET "/tasks/1" for 127.0.0.1 at 2026-02-17 12:34:34 +0530
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.2ms | GC: 0.0ms)
+Completed 200 OK in 11ms (Views: 5.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------
+TasksTest: test_user_creates_a_task_and_sees_it_in_the_list
+-----------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:34:55 +0530
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered tasks/index.html.erb within layouts/application (Duration: 7.0ms | GC: 2.7ms)
+  Rendered layout layouts/application.html.erb (Duration: 21.1ms | GC: 4.3ms)
+Completed 200 OK in 101ms (Views: 30.9ms | ActiveRecord: 0.5ms (3 queries, 1 cached) | GC: 48.5ms)
+Started GET "/tasks/new" for 127.0.0.1 at 2026-02-17 12:34:55 +0530
+Processing by TasksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 6.1ms | GC: 0.0ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 7.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.2ms | GC: 0.0ms)
+Completed 200 OK in 41ms (Views: 13.0ms | ActiveRecord: 0.5ms (0 queries, 0 cached) | GC: 0.9ms)
+Started POST "/tasks" for 127.0.0.1 at 2026-02-17 12:34:56 +0530
+Processing by TasksController#create as TURBO_STREAM
+  Parameters: {"task"=>{"title"=>"Buy groceries", "description"=>"Milk, eggs, bread", "due_date"=>"60301-02-02"}, "commit"=>"Create Task"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Buy groceries"], ["description", "Milk, eggs, bread"], ["due_date", "60301-02-02"], ["completed", 0], ["created_at", "2026-02-17 07:04:56.192441"], ["updated_at", "2026-02-17 07:04:56.192441"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:43603/tasks
+Completed 302 Found in 7ms (ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:34:56 +0530
+Processing by TasksController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  Rendered tasks/index.html.erb within layouts/application (Duration: 5.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | GC: 0.0ms)
+Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.6ms (4 queries, 1 cached) | GC: 0.0ms)
+Started GET "/tasks/1" for 127.0.0.1 at 2026-02-17 12:34:56 +0530
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.3ms | GC: 0.0ms)
+Completed 200 OK in 10ms (Views: 5.1ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------
+TasksTest: test_user_creates_a_task_and_sees_it_in_the_list
+-----------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:35:16 +0530
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered tasks/index.html.erb within layouts/application (Duration: 6.9ms | GC: 0.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 79.9ms | GC: 55.8ms)
+Completed 200 OK in 126ms (Views: 84.9ms | ActiveRecord: 1.0ms (3 queries, 1 cached) | GC: 59.4ms)
+Started GET "/tasks/new" for 127.0.0.1 at 2026-02-17 12:35:17 +0530
+Processing by TasksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 6.8ms | GC: 0.6ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 8.5ms | GC: 0.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.2ms | GC: 0.7ms)
+Completed 200 OK in 40ms (Views: 14.0ms | ActiveRecord: 0.2ms (0 queries, 0 cached) | GC: 2.0ms)
+Started POST "/tasks" for 127.0.0.1 at 2026-02-17 12:35:17 +0530
+Processing by TasksController#create as TURBO_STREAM
+  Parameters: {"task"=>{"title"=>"Buy groceries", "description"=>"Milk, eggs, bread", "due_date"=>"2026-03-01"}, "commit"=>"Create Task"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Buy groceries"], ["description", "Milk, eggs, bread"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:17.557277"], ["updated_at", "2026-02-17 07:05:17.557277"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:45017/tasks
+Completed 302 Found in 6ms (ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:35:17 +0530
+Processing by TasksController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  Rendered tasks/index.html.erb within layouts/application (Duration: 3.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.7ms | GC: 0.0ms)
+Completed 200 OK in 13ms (Views: 12.1ms | ActiveRecord: 0.4ms (4 queries, 1 cached) | GC: 0.0ms)
+Started GET "/tasks/1" for 127.0.0.1 at 2026-02-17 12:35:17 +0530
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 2.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.9ms | GC: 0.0ms)
+Completed 200 OK in 12ms (Views: 7.0ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------
+TasksTest: test_user_creates_a_task_and_sees_it_in_the_list
+-----------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:35:36 +0530
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered tasks/index.html.erb within layouts/application (Duration: 14.9ms | GC: 9.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 59.2ms | GC: 39.4ms)
+Completed 200 OK in 117ms (Views: 74.4ms | ActiveRecord: 0.8ms (3 queries, 1 cached) | GC: 60.9ms)
+Started GET "/tasks/new" for 127.0.0.1 at 2026-02-17 12:35:36 +0530
+Processing by TasksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 4.9ms | GC: 0.0ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 6.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | GC: 0.0ms)
+Completed 200 OK in 38ms (Views: 11.3ms | ActiveRecord: 0.3ms (0 queries, 0 cached) | GC: 2.1ms)
+Started POST "/tasks" for 127.0.0.1 at 2026-02-17 12:35:37 +0530
+Processing by TasksController#create as TURBO_STREAM
+  Parameters: {"task"=>{"title"=>"Buy groceries", "description"=>"Milk, eggs, bread", "due_date"=>"2026-03-01"}, "commit"=>"Create Task"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Buy groceries"], ["description", "Milk, eggs, bread"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:37.101025"], ["updated_at", "2026-02-17 07:05:37.101025"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:46817/tasks
+Completed 302 Found in 7ms (ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:35:37 +0530
+Processing by TasksController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  Rendered tasks/index.html.erb within layouts/application (Duration: 8.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 19.5ms | GC: 0.0ms)
+Completed 200 OK in 24ms (Views: 21.5ms | ActiveRecord: 1.0ms (4 queries, 1 cached) | GC: 0.0ms)
+Started GET "/tasks/1" for 127.0.0.1 at 2026-02-17 12:35:37 +0530
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 2.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.3ms | GC: 0.0ms)
+Completed 200 OK in 9ms (Views: 5.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------------------------------
+TasksControllerTest: test_POST_/tasks_creates_a_task_and_redirects
+------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.9ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.346076"], ["updated_at", "2026-02-17 07:05:44.346076"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2026-02-17 12:35:44 +0530
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"title"=>"New task", "description"=>"Details", "due_date"=>"2026-04-01"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "New task"], ["description", "Details"], ["due_date", "2026-04-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.523455"], ["updated_at", "2026-02-17 07:05:44.523455"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 25ms (ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 11.7ms)
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------------------------------
+TasksControllerTest: test_POST_/tasks_with_blank_title_renders_unprocessable_entity
+-----------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.538707"], ["updated_at", "2026-02-17 07:05:44.538707"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started POST "/tasks" for 127.0.0.1 at 2026-02-17 12:35:44 +0530
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"title"=>"", "description"=>"Details"}}
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 8.5ms | GC: 0.7ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 10.6ms | GC: 0.7ms)
+  Rendered layout layouts/application.html.erb (Duration: 22.0ms | GC: 2.2ms)
+Completed 422 Unprocessable Content in 32ms (Views: 30.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.6ms)
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-------------------------------------------------------------
+TasksControllerTest: test_GET_/tasks/:id/edit_returns_success
+-------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.579991"], ["updated_at", "2026-02-17 07:05:44.579991"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/1/edit" for 127.0.0.1 at 2026-02-17 12:35:44 +0530
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 7.4ms | GC: 0.0ms)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 8.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | GC: 0.0ms)
+Completed 200 OK in 14ms (Views: 11.0ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+---------------------------------------------------------------------------
+TasksControllerTest: test_DELETE_/tasks/:id_destroys_the_task_and_redirects
+---------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.603419"], ["updated_at", "2026-02-17 07:05:44.603419"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Started DELETE "/tasks/1" for 127.0.0.1 at 2026-02-17 12:35:44 +0530
+Processing by TasksController#destroy as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Destroy (0.2ms)[0m  [1m[31mDELETE FROM "tasks" WHERE "tasks"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks
+Completed 302 Found in 3ms (ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------
+TasksControllerTest: test_GET_/tasks/:id_returns_success
+--------------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.615770"], ["updated_at", "2026-02-17 07:05:44.615770"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/1" for 127.0.0.1 at 2026-02-17 12:35:44 +0530
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 2.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.7ms | GC: 0.0ms)
+Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------
+TasksControllerTest: test_GET_/tasks_returns_success
+----------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.631569"], ["updated_at", "2026-02-17 07:05:44.631569"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:35:44 +0530
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTask Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  Rendered tasks/index.html.erb within layouts/application (Duration: 15.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 17.3ms | GC: 0.0ms)
+Completed 200 OK in 20ms (Views: 16.8ms | ActiveRecord: 1.1ms (4 queries, 1 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------------------------------------------------
+TasksControllerTest: test_PATCH_/tasks/:id_with_blank_title_renders_unprocessable_entity
+----------------------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.688083"], ["updated_at", "2026-02-17 07:05:44.688083"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/tasks/1" for 127.0.0.1 at 2026-02-17 12:35:44 +0530
+Processing by TasksController#update as HTML
+  Parameters: {"task"=>{"title"=>""}, "id"=>"1"}
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 10.6ms | GC: 0.0ms)
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 11.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 13.8ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 19ms (Views: 14.6ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-------------------------------------------------------------------------
+TasksControllerTest: test_PATCH_/tasks/:id_updates_the_task_and_redirects
+-------------------------------------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.723087"], ["updated_at", "2026-02-17 07:05:44.723087"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started PATCH "/tasks/1" for 127.0.0.1 at 2026-02-17 12:35:44 +0530
+Processing by TasksController#update as HTML
+  Parameters: {"task"=>{"title"=>"Updated title"}, "id"=>"1"}
+  [1m[36mTask Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Update (0.6ms)[0m  [1m[33mUPDATE "tasks" SET "title" = ?, "updated_at" = ? WHERE "tasks"."id" = ?[0m  [["title", "Updated title"], ["updated_at", "2026-02-17 07:05:44.740218"], ["id", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://www.example.com/tasks/1
+Completed 302 Found in 21ms (ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------
+TasksControllerTest: test_GET_/tasks/new_returns_success
+--------------------------------------------------------
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.2ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Existing task"], ["description", "Some details"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:44.769283"], ["updated_at", "2026-02-17 07:05:44.769283"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Started GET "/tasks/new" for 127.0.0.1 at 2026-02-17 12:35:44 +0530
+Processing by TasksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 8.3ms | GC: 0.0ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 8.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.3ms | GC: 0.0ms)
+Completed 200 OK in 12ms (Views: 11.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------
+TaskTest: test_task_is_valid_with_a_title
+-----------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+------------------------------------------
+TaskTest: test_completed_defaults_to_false
+------------------------------------------
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Test task"], ["description", nil], ["due_date", nil], ["completed", 0], ["created_at", "2026-02-17 07:05:44.794891"], ["updated_at", "2026-02-17 07:05:44.794891"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------------------
+TaskTest: test_tasks_are_ordered_by_creation_date_newest_first
+--------------------------------------------------------------
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Task A"], ["description", nil], ["due_date", nil], ["completed", 0], ["created_at", "2026-02-17 07:05:44.798984"], ["updated_at", "2026-02-17 07:05:44.798984"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.3ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Task B"], ["description", nil], ["due_date", nil], ["completed", 0], ["created_at", "2026-02-17 07:05:44.802223"], ["updated_at", "2026-02-17 07:05:44.802223"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Load (0.0ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+----------------------------------------------
+TaskTest: test_task_is_invalid_without_a_title
+----------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------
+TaskTest: test_task_is_valid_without_a_due_date
+-----------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+--------------------------------------------------
+TaskTest: test_task_is_valid_without_a_description
+--------------------------------------------------
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN deferred TRANSACTION[0m
+-----------------------------------------------------------
+TasksTest: test_user_creates_a_task_and_sees_it_in_the_list
+-----------------------------------------------------------
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:35:47 +0530
+Processing by TasksController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  Rendered tasks/index.html.erb within layouts/application (Duration: 3.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 69.2ms | GC: 51.1ms)
+Completed 200 OK in 107ms (Views: 73.8ms | ActiveRecord: 0.5ms (3 queries, 1 cached) | GC: 53.9ms)
+Started GET "/tasks/new" for 127.0.0.1 at 2026-02-17 12:35:47 +0530
+Processing by TasksController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Rendered tasks/_form.html.erb (Duration: 5.8ms | GC: 0.0ms)
+  Rendered tasks/new.html.erb within layouts/application (Duration: 8.4ms | GC: 0.8ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | GC: 0.8ms)
+Completed 200 OK in 38ms (Views: 12.9ms | ActiveRecord: 0.3ms (0 queries, 0 cached) | GC: 1.2ms)
+Started POST "/tasks" for 127.0.0.1 at 2026-02-17 12:35:48 +0530
+Processing by TasksController#create as TURBO_STREAM
+  Parameters: {"task"=>{"title"=>"Buy groceries", "description"=>"Milk, eggs, bread", "due_date"=>"2026-03-01"}, "commit"=>"Create Task"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.1ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "due_date", "completed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["title", "Buy groceries"], ["description", "Milk, eggs, bread"], ["due_date", "2026-03-01"], ["completed", 0], ["created_at", "2026-02-17 07:05:48.419117"], ["updated_at", "2026-02-17 07:05:48.419117"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://127.0.0.1:34551/tasks
+Completed 302 Found in 8ms (ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 0.0ms)
+Started GET "/tasks" for 127.0.0.1 at 2026-02-17 12:35:48 +0530
+Processing by TasksController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  [1m[36mTask Count (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mCACHE Task Count (0.0ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTask Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "tasks" LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTask Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" ORDER BY "tasks"."created_at" DESC[0m
+  Rendered tasks/index.html.erb within layouts/application (Duration: 2.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | GC: 0.0ms)
+Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.3ms (4 queries, 1 cached) | GC: 0.0ms)
+Started GET "/tasks/1" for 127.0.0.1 at 2026-02-17 12:35:48 +0530
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Rendered tasks/show.html.erb within layouts/application (Duration: 1.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.2ms | GC: 0.0ms)
+Completed 200 OK in 7ms (Views: 3.8ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m

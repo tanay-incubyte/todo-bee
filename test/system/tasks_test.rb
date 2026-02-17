@@ -4,11 +4,11 @@ class TasksTest < ApplicationSystemTestCase
   test "user creates a task and sees it in the list" do
     visit tasks_path
 
-    click_on "New Task"
+    within("nav") { click_on "New Task" }
 
     fill_in "Title", with: "Buy groceries"
     fill_in "Description", with: "Milk, eggs, bread"
-    fill_in "Due date", with: "2026-03-01"
+    execute_script("document.getElementById('task_due_date').value = '2026-03-01'")
 
     click_on "Create Task"
 
