@@ -1,6 +1,10 @@
 require "application_system_test_case"
 
 class TasksTest < ApplicationSystemTestCase
+  setup do
+    @task = Task.create!(title: "Existing task", description: "Some details", due_date: "2026-03-15")
+  end
+
   test "user creates a task and sees it in the list" do
     visit tasks_path
 
@@ -19,5 +23,34 @@ class TasksTest < ApplicationSystemTestCase
     assert_text "Buy groceries"
     assert_text "Milk, eggs, bread"
     assert_text "March 01, 2026"
+  end
+
+  test "user sees error when creating task without title" do
+    visit new_task_path
+
+    fill_in "Title", with: ""
+    click_on "Create Task"
+
+    assert_text "Title can't be blank"
+  end
+
+  test "user sees error when editing task to blank title" do
+    visit edit_task_path(@task)
+
+    fill_in "Title", with: ""
+    click_on "Update Task"
+
+    assert_text "Title can't be blank"
+  end
+
+  test "user deletes a task with confirmation" do
+    visit task_path(@task)
+
+    accept_confirm("Are you sure you want to delete this task?") do
+      click_on "Delete"
+    end
+
+    assert_current_path tasks_path
+    assert_no_text "Existing task"
   end
 end
