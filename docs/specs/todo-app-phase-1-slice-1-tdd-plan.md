@@ -34,10 +34,10 @@ If stuck after 3 attempts, mark ⚠️ and move to the next independent step.
 
 ## Step 0: Project Setup
 
-- [ ] **Generate Rails app**: `rails new todo --css tailwind` (creates Rails 8 app with Tailwind CSS, Hotwire is included by default)
-- [ ] **Verify setup**: Run `bin/rails server` and confirm the Rails welcome page loads
-- [ ] **Verify test setup**: Run `bin/rails test` — should pass with 0 tests, 0 failures
-- [ ] **COMMIT**: "chore: initialize Rails 8 app with Tailwind CSS"
+- [x] **Generate Rails app**: `rails new todo --css tailwind` (creates Rails 8 app with Tailwind CSS, Hotwire is included by default)
+- [x] **Verify setup**: Rails 8.0.2.1 app generated successfully
+- [x] **Verify test setup**: Run `bin/rails test` — 0 tests, 0 failures
+- [x] **COMMIT**: "chore: initialize Rails 8 app with Tailwind CSS"
 
 ---
 
