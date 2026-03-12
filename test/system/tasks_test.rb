@@ -43,6 +43,25 @@ class TasksTest < ApplicationSystemTestCase
     assert_text "Title can't be blank"
   end
 
+  test "user toggles task completion from the list" do
+    visit tasks_path
+
+    # Task should start as incomplete
+    assert_no_selector "#task_#{@task.id}.task-completed"
+
+    # Click toggle to mark complete
+    within("#task_#{@task.id}") { click_button "Mark complete" }
+
+    # Wait for page to update — task should now be completed
+    assert_selector "#task_#{@task.id}.task-completed"
+
+    # Toggle back to incomplete
+    within("#task_#{@task.id}") { click_button "Mark incomplete" }
+
+    # Task should be incomplete again
+    assert_no_selector "#task_#{@task.id}.task-completed"
+  end
+
   test "user deletes a task with confirmation" do
     visit task_path(@task)
 

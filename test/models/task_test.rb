@@ -27,6 +27,20 @@ class TaskTest < ActiveSupport::TestCase
     assert_equal false, task.completed
   end
 
+  test "toggle_completion! flips completed from false to true" do
+    task = Task.create!(title: "Test task")
+    assert_equal false, task.completed
+    task.toggle_completion!
+    assert_equal true, task.reload.completed
+  end
+
+  test "toggle_completion! flips completed from true to false" do
+    task = Task.create!(title: "Test task", completed: true)
+    assert_equal true, task.completed
+    task.toggle_completion!
+    assert_equal false, task.reload.completed
+  end
+
   test "tasks are ordered by creation date newest first" do
     task_a = Task.create!(title: "Task A")
     task_b = Task.create!(title: "Task B")
