@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = Task.newest_first
+    @tasks = @tasks.by_priority(params[:priority]) if params[:priority].present?
   end
 
   def show
@@ -50,6 +51,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :description, :due_date)
+    params.require(:task).permit(:title, :description, :due_date, :priority)
   end
 end

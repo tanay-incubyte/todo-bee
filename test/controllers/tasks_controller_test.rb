@@ -92,4 +92,25 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     end
     assert_redirected_to tasks_path
   end
+
+  # Priority filtering
+  test "GET /tasks with priority filter returns filtered tasks" do
+    high_task = Task.create!(title: "High priority", priority: "high")
+    low_task = Task.create!(title: "Low priority", priority: "low")
+
+    get tasks_path, params: { priority: "high" }
+
+    assert_response :success
+    assert_match "High priority", response.body
+    assert_no_match "Low priority", response.body
+  end
+
+  # Create with priority
+  test "POST /tasks creates a task with priority" do
+    post tasks_path, params: { task: { title: "Important task", priority: "high" } }
+    assert_redirected_to tasks_path
+
+    task = Task.last
+    assert_equal "high", task.priority
+  end
 end

@@ -46,4 +46,40 @@ class TaskTest < ActiveSupport::TestCase
     task_b = Task.create!(title: "Task B")
     assert_equal [task_b, task_a], Task.newest_first.to_a
   end
+
+  test "task is valid with priority high" do
+    task = Task.new(title: "Test task", priority: "high")
+    assert task.valid?
+  end
+
+  test "task is valid with priority medium" do
+    task = Task.new(title: "Test task", priority: "medium")
+    assert task.valid?
+  end
+
+  test "task is valid with priority low" do
+    task = Task.new(title: "Test task", priority: "low")
+    assert task.valid?
+  end
+
+  test "task is valid without priority" do
+    task = Task.new(title: "Test task", priority: nil)
+    assert task.valid?
+  end
+
+  test "task is invalid with unknown priority" do
+    task = Task.new(title: "Test task", priority: "urgent")
+    assert_not task.valid?
+    assert_includes task.errors[:priority], "is not included in the list"
+  end
+
+  test "by_priority scope filters tasks" do
+    high_task = Task.create!(title: "High task", priority: "high")
+    low_task = Task.create!(title: "Low task", priority: "low")
+    no_priority = Task.create!(title: "No priority task")
+
+    assert_includes Task.by_priority("high"), high_task
+    assert_not_includes Task.by_priority("high"), low_task
+    assert_not_includes Task.by_priority("high"), no_priority
+  end
 end

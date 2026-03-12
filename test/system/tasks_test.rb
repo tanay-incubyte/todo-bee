@@ -72,4 +72,28 @@ class TasksTest < ApplicationSystemTestCase
     assert_current_path tasks_path
     assert_no_text "Existing task"
   end
+
+  test "user creates a task with priority and sees priority badge" do
+    visit new_task_path
+
+    fill_in "Title", with: "Urgent meeting prep"
+    select "High", from: "Priority"
+    click_on "Create Task"
+
+    assert_text "Urgent meeting prep"
+    assert_selector ".priority-high"
+  end
+
+  test "user filters tasks by priority" do
+    Task.create!(title: "High priority task", priority: "high")
+    Task.create!(title: "Low priority task", priority: "low")
+
+    visit tasks_path
+
+    select "High", from: "priority_filter"
+    click_on "Filter"
+
+    assert_text "High priority task"
+    assert_no_text "Low priority task"
+  end
 end
