@@ -4,14 +4,25 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.all
 
-    @tasks = @tasks.by_priority(params[:priority]) if params[:priority].present?
-    @tasks = @tasks.by_category(params[:category]) if params[:category].present?
+    if params[:priority].present?
+      priorities = params[:priority].split(',')
+      @tasks = @tasks.by_priority(priorities)
+    end
 
-    case params[:status]
-    when "active"
-      @tasks = @tasks.active
-    when "completed"
-      @tasks = @tasks.completed_tasks
+    if params[:category].present?
+      category_ids = params[:category].split(',')
+      @tasks = @tasks.by_category(category_ids)
+    end
+
+    if params[:status].present?
+      statuses = params[:status].split(',')
+      if statuses.include?('active') && statuses.include?('completed')
+        # Both selected = all tasks (no filter)
+      elsif statuses.include?('active')
+        @tasks = @tasks.active
+      elsif statuses.include?('completed')
+        @tasks = @tasks.completed_tasks
+      end
     end
 
     @tasks = case params[:sort]

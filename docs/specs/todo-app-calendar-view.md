@@ -44,6 +44,12 @@ Add a calendar view to visualize tasks by their due dates. Users can switch betw
 - [x] Responsive layout for desktop and tablet
 - [x] Empty days show no placeholder (clean grid)
 
+### Filtering (Added)
+- [x] Same filter bar as task list (Status, Priority, Category)
+- [x] Multi-select filters (e.g., High AND Medium priority)
+- [x] Filters persist when navigating between dates
+- [x] Filters persist when switching views (Month/Week/Day)
+
 ## Out of Scope
 - Drag-and-drop to change due dates
 - Creating tasks directly from calendar

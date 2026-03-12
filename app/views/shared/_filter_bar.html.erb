@@ -1,0 +1,167 @@
+<%# locals: (base_path:, show_sort: true) %>
+<%
+  # Helper to check if a value is selected (supports comma-separated multi-select)
+  def filter_selected?(param_value, check_value)
+    return false if param_value.blank?
+    param_value.to_s.split(',').include?(check_value.to_s)
+  end
+  
+  # Helper to get display text for multi-select
+  def filter_display(param_value, all_label, capitalize: true)
+    return all_label if param_value.blank?
+    values = param_value.to_s.split(',')
+    if values.length == 1
+      capitalize ? values.first.capitalize : values.first
+    else
+      "#{values.length} selected"
+    end
+  end
+  
+  # Get selected category names for display
+  selected_category_ids = params[:category].to_s.split(',').map(&:to_i)
+  selected_categories = Category.where(id: selected_category_ids) if selected_category_ids.any?
+  category_display = if selected_category_ids.empty?
+    'All'
+  elsif selected_category_ids.length == 1
+    selected_categories&.first&.name || 'All'
+  else
+    "#{selected_category_ids.length} selected"
+  end
+%>
+
+<div class="filter-bar bg-white rounded-xl border border-gray-200 shadow-sm px-4 py-3 mb-6">
+  <div class="flex flex-wrap items-center gap-3">
+    <span class="text-sm font-medium text-gray-500">Filters:</span>
+
+    <%# Status Dropdown - multi-select %>
+    <div class="relative">
+      <button type="button" onclick="toggleDropdown(this)" 
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition <%= params[:status].present? ? 'text-indigo-600 border-indigo-300 bg-indigo-50' : 'text-gray-700' %>">
+        Status: <%= filter_display(params[:status], 'All') %>
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div class="dropdown-menu hidden absolute left-0 mt-1 w-44 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+        <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+          <input type="checkbox" <%= 'checked' if params[:status].blank? %>
+                 onchange="clearFilter('status')"
+                 class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+          <span class="ml-2 text-sm text-gray-700">All</span>
+        </label>
+        <div class="border-t border-gray-100 my-1"></div>
+        <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+          <input type="checkbox" <%= 'checked' if filter_selected?(params[:status], 'active') %>
+                 onchange="toggleFilter('status', 'active', this.checked)"
+                 class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+          <span class="ml-2 text-sm text-gray-700">Active</span>
+        </label>
+        <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+          <input type="checkbox" <%= 'checked' if filter_selected?(params[:status], 'completed') %>
+                 onchange="toggleFilter('status', 'completed', this.checked)"
+                 class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+          <span class="ml-2 text-sm text-gray-700">Completed</span>
+        </label>
+      </div>
+    </div>
+
+    <%# Priority Dropdown - multi-select %>
+    <div class="relative">
+      <button type="button" onclick="toggleDropdown(this)"
+              class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition <%= params[:priority].present? ? 'text-indigo-600 border-indigo-300 bg-indigo-50' : 'text-gray-700' %>">
+        Priority: <%= filter_display(params[:priority], 'All') %>
+        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+      </button>
+      <div class="dropdown-menu hidden absolute left-0 mt-1 w-44 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+        <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+          <input type="checkbox" <%= 'checked' if params[:priority].blank? %>
+                 onchange="clearFilter('priority')"
+                 class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+          <span class="ml-2 text-sm text-gray-700">All</span>
+        </label>
+        <div class="border-t border-gray-100 my-1"></div>
+        <% %w[high medium low].each do |priority| %>
+          <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+            <input type="checkbox" <%= 'checked' if filter_selected?(params[:priority], priority) %>
+                   onchange="toggleFilter('priority', '<%= priority %>', this.checked)"
+                   class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+            <span class="ml-2 text-sm text-gray-700"><%= priority.capitalize %></span>
+          </label>
+        <% end %>
+      </div>
+    </div>
+
+    <%# Category Dropdown - multi-select %>
+    <% if Category.any? %>
+      <div class="relative">
+        <button type="button" onclick="toggleDropdown(this)"
+                class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition <%= params[:category].present? ? 'text-indigo-600 border-indigo-300 bg-indigo-50' : 'text-gray-700' %>">
+          Category: <%= category_display %>
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="dropdown-menu hidden absolute left-0 mt-1 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50 max-h-60 overflow-y-auto">
+          <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+            <input type="checkbox" <%= 'checked' if params[:category].blank? %>
+                   onchange="clearFilter('category')"
+                   class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+            <span class="ml-2 text-sm text-gray-700">All</span>
+          </label>
+          <div class="border-t border-gray-100 my-1"></div>
+          <% Category.order(:name).each do |category| %>
+            <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+              <input type="checkbox" <%= 'checked' if filter_selected?(params[:category], category.id) %>
+                     onchange="toggleFilter('category', '<%= category.id %>', this.checked)"
+                     class="rounded border-gray-300 text-indigo-600 focus:ring-indigo-500">
+              <span class="ml-2 text-sm text-gray-700"><%= category.name %></span>
+            </label>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <%# Sort Dropdown - single select %>
+    <% if show_sort %>
+      <% sort_labels = { '' => 'Newest', 'due_date' => 'Due Date', 'priority' => 'Priority' } %>
+      <div class="relative">
+        <button type="button" onclick="toggleDropdown(this)"
+                class="inline-flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-lg border border-gray-300 bg-white hover:bg-gray-50 transition <%= params[:sort].present? ? 'text-indigo-600 border-indigo-300 bg-indigo-50' : 'text-gray-700' %>">
+          Sort: <%= sort_labels[params[:sort].to_s] || 'Newest' %>
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <div class="dropdown-menu hidden absolute left-0 mt-1 w-40 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+          <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+            <input type="radio" name="sort" <%= 'checked' if params[:sort].blank? %>
+                   onchange="setFilter('sort', '')"
+                   class="border-gray-300 text-indigo-600 focus:ring-indigo-500">
+            <span class="ml-2 text-sm text-gray-700">Newest</span>
+          </label>
+          <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+            <input type="radio" name="sort" <%= 'checked' if params[:sort] == 'due_date' %>
+                   onchange="setFilter('sort', 'due_date')"
+                   class="border-gray-300 text-indigo-600 focus:ring-indigo-500">
+            <span class="ml-2 text-sm text-gray-700">Due Date</span>
+          </label>
+          <label class="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer" onclick="event.stopPropagation()">
+            <input type="radio" name="sort" <%= 'checked' if params[:sort] == 'priority' %>
+                   onchange="setFilter('sort', 'priority')"
+                   class="border-gray-300 text-indigo-600 focus:ring-indigo-500">
+            <span class="ml-2 text-sm text-gray-700">Priority</span>
+          </label>
+        </div>
+      </div>
+    <% end %>
+
+    <%# Clear All %>
+    <% if params[:priority].present? || params[:category].present? || params[:status].present? || params[:sort].present? %>
+      <%= link_to base_path, class: "text-sm text-red-600 hover:text-red-700 font-medium ml-2" do %>
+        Clear All
+      <% end %>
+    <% end %>
+  </div>
+</div>

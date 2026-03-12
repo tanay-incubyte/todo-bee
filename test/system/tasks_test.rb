@@ -88,11 +88,7 @@ class TasksTest < ApplicationSystemTestCase
     Task.create!(title: "High priority task", priority: "high")
     Task.create!(title: "Low priority task", priority: "low")
 
-    visit tasks_path
-
-    within(".sidebar") do
-      click_on "High"
-    end
+    visit tasks_path(priority: "high")
 
     assert_text "High priority task"
     assert_no_text "Low priority task"
@@ -122,27 +118,18 @@ class TasksTest < ApplicationSystemTestCase
     Task.create!(title: "Work task", category: work)
     Task.create!(title: "Personal task", category: personal)
 
-    visit tasks_path
-
-    within(".sidebar") do
-      click_on "Work"
-    end
+    visit tasks_path(category: work.id)
 
     assert_text "Work task"
     assert_no_text "Personal task"
   end
 
-  test "user filters tasks using sidebar" do
+  test "user filters tasks using filter bar" do
     work = Category.create!(name: "Work")
     Task.create!(title: "High work task", priority: "high", category: work)
     Task.create!(title: "Low personal task", priority: "low")
 
-    visit tasks_path
-
-    within(".sidebar") do
-      click_on "High"
-      click_on "Work"
-    end
+    visit tasks_path(priority: "high", category: work.id)
 
     assert_text "High work task"
     assert_no_text "Low personal task"
@@ -152,11 +139,7 @@ class TasksTest < ApplicationSystemTestCase
     Task.create!(title: "Later task", due_date: 1.week.from_now)
     Task.create!(title: "Earlier task", due_date: 1.day.from_now)
 
-    visit tasks_path
-
-    within(".sidebar") do
-      click_on "Due Date"
-    end
+    visit tasks_path(sort: "due_date")
 
     page_text = page.body
     assert page_text.index("Earlier task") < page_text.index("Later task"),
@@ -167,11 +150,7 @@ class TasksTest < ApplicationSystemTestCase
     Task.create!(title: "Active task", completed: false)
     Task.create!(title: "Done task", completed: true)
 
-    visit tasks_path
-
-    within(".sidebar") do
-      click_on "Completed"
-    end
+    visit tasks_path(status: "completed")
 
     assert_text "Done task"
     assert_no_text "Active task"

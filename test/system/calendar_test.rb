@@ -18,7 +18,7 @@ class CalendarTest < ApplicationSystemTestCase
   test "user navigates to next month" do
     visit calendar_path
 
-    click_on "Next"
+    find("[aria-label='Next month']").click
 
     next_month = @today.next_month
     assert_text next_month.strftime("%B %Y")
