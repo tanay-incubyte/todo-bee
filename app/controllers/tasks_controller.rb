@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[show edit update destroy]
+  before_action :set_task, only: %i[show edit update destroy toggle_complete]
 
   def index
     @tasks = Task.newest_first
@@ -31,6 +31,11 @@ class TasksController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def toggle_complete
+    @task.toggle_completion!
+    redirect_to tasks_path
   end
 
   def destroy

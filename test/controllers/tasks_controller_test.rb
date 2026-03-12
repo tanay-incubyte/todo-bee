@@ -59,6 +59,32 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
+  # Toggle complete
+  test "PATCH /tasks/:id/toggle_complete marks task as completed" do
+    assert_equal false, @task.completed
+    patch toggle_complete_task_path(@task)
+    assert_redirected_to tasks_path
+    @task.reload
+    assert_equal true, @task.completed
+  end
+
+  test "PATCH /tasks/:id/toggle_complete marks completed task as incomplete" do
+    @task.update!(completed: true)
+    patch toggle_complete_task_path(@task)
+    assert_redirected_to tasks_path
+    @task.reload
+    assert_equal false, @task.completed
+  end
+
+  # Preserve completion on edit
+  test "PATCH /tasks/:id update preserves completed status" do
+    @task.update!(completed: true)
+    patch task_path(@task), params: { task: { title: "New title" } }
+    @task.reload
+    assert_equal true, @task.completed
+    assert_equal "New title", @task.title
+  end
+
   # Destroy
   test "DELETE /tasks/:id destroys the task and redirects" do
     assert_difference("Task.count", -1) do
