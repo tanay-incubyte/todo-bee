@@ -1,0 +1,26 @@
+<div class="week-view">
+  <div class="grid grid-cols-7 border-b border-gray-100">
+    <% (@start_date..@end_date).each do |date| %>
+      <% is_today = date == Date.today %>
+      <div class="px-2 py-3 text-center border-r border-gray-100 <%= 'bg-indigo-50' if is_today %>">
+        <div class="text-xs font-semibold text-gray-500 uppercase"><%= date.strftime("%a") %></div>
+        <div class="text-lg font-medium <%= is_today ? 'text-indigo-600' : 'text-gray-900' %>"><%= date.day %></div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="grid grid-cols-7 min-h-64">
+    <% (@start_date..@end_date).each do |date| %>
+      <% is_today = date == Date.today %>
+      <div class="p-2 border-r border-gray-100 <%= 'bg-indigo-50' if is_today %>">
+        <% if @tasks_by_date[date] %>
+          <div class="space-y-2">
+            <% @tasks_by_date[date].each do |task| %>
+              <%= render "task_item", task: task, compact: false %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
