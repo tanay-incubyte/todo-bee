@@ -82,4 +82,25 @@ class TaskTest < ActiveSupport::TestCase
     assert_not_includes Task.by_priority("high"), low_task
     assert_not_includes Task.by_priority("high"), no_priority
   end
+
+  test "task can belong to a category" do
+    category = Category.create!(name: "Work")
+    task = Task.create!(title: "Work task", category: category)
+    assert_equal category, task.category
+  end
+
+  test "task is valid without a category" do
+    task = Task.new(title: "No category task", category: nil)
+    assert task.valid?
+  end
+
+  test "by_category scope filters tasks" do
+    work = Category.create!(name: "Work")
+    personal = Category.create!(name: "Personal")
+    work_task = Task.create!(title: "Work task", category: work)
+    personal_task = Task.create!(title: "Personal task", category: personal)
+
+    assert_includes Task.by_category(work.id), work_task
+    assert_not_includes Task.by_category(work.id), personal_task
+  end
 end

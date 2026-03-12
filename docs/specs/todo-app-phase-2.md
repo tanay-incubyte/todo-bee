@@ -12,14 +12,14 @@ Extend the task management app with priority levels, categories, and a sidebar-b
 - [x] User can filter the task list to show only tasks of a specific priority
 
 ## Slice 2: Categories
-- [ ] User can create a new category with a name
-- [ ] User can view a list of all categories
-- [ ] User can edit a category's name
-- [ ] User can delete a category (tasks in that category become uncategorized)
-- [ ] User can assign a task to one category when creating the task
-- [ ] User can change or remove a task's category when editing
-- [ ] Task list shows the category name for categorized tasks
-- [ ] User can filter the task list to show only tasks in a specific category
+- [x] User can create a new category with a name
+- [x] User can view a list of all categories
+- [x] User can edit a category's name
+- [x] User can delete a category (tasks in that category become uncategorized)
+- [x] User can assign a task to one category when creating the task
+- [x] User can change or remove a task's category when editing
+- [x] Task list shows the category name for categorized tasks
+- [x] User can filter the task list to show only tasks in a specific category
 
 ## Slice 3: Sidebar Filtering + Sorting
 - [ ] A persistent sidebar appears on the left side of the task list page

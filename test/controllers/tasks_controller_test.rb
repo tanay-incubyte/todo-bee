@@ -113,4 +113,28 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     task = Task.last
     assert_equal "high", task.priority
   end
+
+  # Create with category
+  test "POST /tasks creates a task with category" do
+    category = Category.create!(name: "Work")
+    post tasks_path, params: { task: { title: "Work task", category_id: category.id } }
+    assert_redirected_to tasks_path
+
+    task = Task.last
+    assert_equal category, task.category
+  end
+
+  # Category filtering
+  test "GET /tasks with category filter returns filtered tasks" do
+    work = Category.create!(name: "Work")
+    personal = Category.create!(name: "Personal")
+    work_task = Task.create!(title: "Work task", category: work)
+    Task.create!(title: "Personal task", category: personal)
+
+    get tasks_path, params: { category: work.id }
+
+    assert_response :success
+    assert_match "Work task", response.body
+    assert_no_match "Personal task", response.body
+  end
 end

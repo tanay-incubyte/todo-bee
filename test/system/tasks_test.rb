@@ -96,4 +96,37 @@ class TasksTest < ApplicationSystemTestCase
     assert_text "High priority task"
     assert_no_text "Low priority task"
   end
+
+  test "user creates a category and assigns it to a task" do
+    visit categories_path
+    click_on "New Category"
+
+    fill_in "Name", with: "Work"
+    click_on "Create Category"
+
+    assert_text "Work"
+
+    visit new_task_path
+    fill_in "Title", with: "Finish report"
+    select "Work", from: "Category"
+    click_on "Create Task"
+
+    assert_text "Finish report"
+    assert_selector ".category-badge", text: "Work"
+  end
+
+  test "user filters tasks by category" do
+    work = Category.create!(name: "Work")
+    personal = Category.create!(name: "Personal")
+    Task.create!(title: "Work task", category: work)
+    Task.create!(title: "Personal task", category: personal)
+
+    visit tasks_path
+
+    select "Work", from: "category_filter"
+    click_on "Filter"
+
+    assert_text "Work task"
+    assert_no_text "Personal task"
+  end
 end
