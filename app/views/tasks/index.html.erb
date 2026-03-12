@@ -1,22 +1,16 @@
-<div class="space-y-4">
-  <div class="flex items-center justify-between">
-    <h1 class="text-2xl font-bold text-gray-900">My Tasks</h1>
-    <p class="text-sm text-gray-500"><%= @tasks.count %> <%= "task".pluralize(@tasks.count) %></p>
-  </div>
+<div class="flex gap-6">
+  <%= render "sidebar" %>
 
-  <%= form_with url: tasks_path, method: :get, class: "flex items-center gap-3 flex-wrap" do |f| %>
-    <%= f.select :priority, [["All Priorities", ""], ["High", "high"], ["Medium", "medium"], ["Low", "low"]], { selected: params[:priority] }, { id: "priority_filter", class: "rounded-lg border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500" } %>
-    <%= f.collection_select :category, Category.order(:name), :id, :name, { include_blank: "All Categories", selected: params[:category] }, { id: "category_filter", class: "rounded-lg border-gray-300 text-sm focus:border-indigo-500 focus:ring-indigo-500" } %>
-    <%= f.submit "Filter", class: "rounded-lg bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 transition cursor-pointer" %>
-    <% if params[:priority].present? || params[:category].present? %>
-      <%= link_to "Clear", tasks_path, class: "text-sm text-gray-500 hover:text-gray-700" %>
-    <% end %>
-  <% end %>
+  <div class="flex-1 space-y-4">
+    <div class="flex items-center justify-between">
+      <h1 class="text-2xl font-bold text-gray-900">My Tasks</h1>
+      <p class="text-sm text-gray-500"><%= @tasks.count %> <%= "task".pluralize(@tasks.count) %></p>
+    </div>
 
-  <% if @tasks.any? %>
+    <% if @tasks.any? %>
     <div class="bg-white shadow-sm rounded-xl border border-gray-200 divide-y divide-gray-100">
       <% @tasks.each do |task| %>
-        <div id="task_<%= task.id %>" class="flex items-center px-5 py-4 hover:bg-gray-50 transition group <%= 'task-completed' if task.completed? %>">
+        <div id="task_<%= task.id %>" class="task-item flex items-center px-5 py-4 hover:bg-gray-50 transition group <%= 'task-completed' if task.completed? %>">
           <div class="flex-shrink-0 mr-3">
             <%= button_to toggle_complete_task_path(task), method: :patch, class: "focus:outline-none cursor-pointer", title: task.completed? ? "Mark incomplete" : "Mark complete", form: { class: "inline" } do %>
               <% if task.completed? %>
@@ -79,4 +73,5 @@
       </div>
     </div>
   <% end %>
+  </div>
 </div>

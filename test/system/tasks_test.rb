@@ -90,8 +90,9 @@ class TasksTest < ApplicationSystemTestCase
 
     visit tasks_path
 
-    select "High", from: "priority_filter"
-    click_on "Filter"
+    within(".sidebar") do
+      click_on "High"
+    end
 
     assert_text "High priority task"
     assert_no_text "Low priority task"
@@ -123,10 +124,56 @@ class TasksTest < ApplicationSystemTestCase
 
     visit tasks_path
 
-    select "Work", from: "category_filter"
-    click_on "Filter"
+    within(".sidebar") do
+      click_on "Work"
+    end
 
     assert_text "Work task"
     assert_no_text "Personal task"
+  end
+
+  test "user filters tasks using sidebar" do
+    work = Category.create!(name: "Work")
+    Task.create!(title: "High work task", priority: "high", category: work)
+    Task.create!(title: "Low personal task", priority: "low")
+
+    visit tasks_path
+
+    within(".sidebar") do
+      click_on "High"
+      click_on "Work"
+    end
+
+    assert_text "High work task"
+    assert_no_text "Low personal task"
+  end
+
+  test "user sorts tasks by due date" do
+    Task.create!(title: "Later task", due_date: 1.week.from_now)
+    Task.create!(title: "Earlier task", due_date: 1.day.from_now)
+
+    visit tasks_path
+
+    within(".sidebar") do
+      click_on "Due Date"
+    end
+
+    page_text = page.body
+    assert page_text.index("Earlier task") < page_text.index("Later task"),
+           "Expected 'Earlier task' to appear before 'Later task'"
+  end
+
+  test "user views only completed tasks" do
+    Task.create!(title: "Active task", completed: false)
+    Task.create!(title: "Done task", completed: true)
+
+    visit tasks_path
+
+    within(".sidebar") do
+      click_on "Completed"
+    end
+
+    assert_text "Done task"
+    assert_no_text "Active task"
   end
 end

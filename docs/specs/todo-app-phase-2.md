@@ -22,14 +22,14 @@ Extend the task management app with priority levels, categories, and a sidebar-b
 - [x] User can filter the task list to show only tasks in a specific category
 
 ## Slice 3: Sidebar Filtering + Sorting
-- [ ] A persistent sidebar appears on the left side of the task list page
-- [ ] Sidebar shows filter options: by priority, by category, by completion status
-- [ ] User can select multiple filters at once (e.g., High priority + Work category)
-- [ ] Active filters are visually indicated in the sidebar
-- [ ] User can clear all filters with one click
-- [ ] User can sort tasks by: creation date, due date, or priority
-- [ ] Sort preference persists during the session
-- [ ] Sidebar is collapsible on smaller screens
+- [x] A persistent sidebar appears on the left side of the task list page
+- [x] Sidebar shows filter options: by priority, by category, by completion status
+- [x] User can select multiple filters at once (e.g., High priority + Work category)
+- [x] Active filters are visually indicated in the sidebar
+- [x] User can clear all filters with one click
+- [x] User can sort tasks by: creation date, due date, or priority
+- [x] Sort preference persists during the session
+- [ ] Sidebar is collapsible on smaller screens (deferred to future)
 
 ## Data Model (indicative)
 

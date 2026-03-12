@@ -103,4 +103,41 @@ class TaskTest < ActiveSupport::TestCase
     assert_includes Task.by_category(work.id), work_task
     assert_not_includes Task.by_category(work.id), personal_task
   end
+
+  test "active scope returns incomplete tasks" do
+    active = Task.create!(title: "Active", completed: false)
+    done = Task.create!(title: "Done", completed: true)
+
+    assert_includes Task.active, active
+    assert_not_includes Task.active, done
+  end
+
+  test "completed scope returns completed tasks" do
+    active = Task.create!(title: "Active", completed: false)
+    done = Task.create!(title: "Done", completed: true)
+
+    assert_includes Task.completed_tasks, done
+    assert_not_includes Task.completed_tasks, active
+  end
+
+  test "by_due_date scope sorts tasks" do
+    later = Task.create!(title: "Later", due_date: 1.week.from_now)
+    earlier = Task.create!(title: "Earlier", due_date: 1.day.from_now)
+    no_date = Task.create!(title: "No date")
+
+    sorted = Task.by_due_date.to_a
+    assert_equal earlier, sorted.first
+    assert_equal later, sorted.second
+  end
+
+  test "by_priority_order scope sorts high first" do
+    low = Task.create!(title: "Low", priority: "low")
+    high = Task.create!(title: "High", priority: "high")
+    medium = Task.create!(title: "Medium", priority: "medium")
+
+    sorted = Task.by_priority_order.to_a
+    assert_equal high, sorted.first
+    assert_equal medium, sorted.second
+    assert_equal low, sorted.third
+  end
 end

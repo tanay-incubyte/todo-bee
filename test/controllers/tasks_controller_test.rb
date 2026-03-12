@@ -137,4 +137,48 @@ class TasksControllerTest < ActionDispatch::IntegrationTest
     assert_match "Work task", response.body
     assert_no_match "Personal task", response.body
   end
+
+  # Completion filtering
+  test "GET /tasks with status=active returns only incomplete tasks" do
+    Task.create!(title: "Active task", completed: false)
+    Task.create!(title: "Completed task", completed: true)
+
+    get tasks_path, params: { status: "active" }
+
+    assert_response :success
+    assert_match "Active task", response.body
+    assert_no_match "Completed task", response.body
+  end
+
+  test "GET /tasks with status=completed returns only completed tasks" do
+    Task.create!(title: "Active task", completed: false)
+    Task.create!(title: "Completed task", completed: true)
+
+    get tasks_path, params: { status: "completed" }
+
+    assert_response :success
+    assert_match "Completed task", response.body
+    assert_no_match "Active task", response.body
+  end
+
+  # Sorting
+  test "GET /tasks with sort=due_date sorts by due date" do
+    Task.create!(title: "Later task", due_date: 1.week.from_now)
+    Task.create!(title: "Earlier task", due_date: 1.day.from_now)
+
+    get tasks_path, params: { sort: "due_date" }
+
+    assert_response :success
+    assert response.body.index("Earlier task") < response.body.index("Later task")
+  end
+
+  test "GET /tasks with sort=priority sorts by priority" do
+    Task.create!(title: "Low task", priority: "low")
+    Task.create!(title: "High task", priority: "high")
+
+    get tasks_path, params: { sort: "priority" }
+
+    assert_response :success
+    assert response.body.index("High task") < response.body.index("Low task")
+  end
 end

@@ -2,9 +2,26 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[show edit update destroy toggle_complete]
 
   def index
-    @tasks = Task.newest_first
+    @tasks = Task.all
+
     @tasks = @tasks.by_priority(params[:priority]) if params[:priority].present?
     @tasks = @tasks.by_category(params[:category]) if params[:category].present?
+
+    case params[:status]
+    when "active"
+      @tasks = @tasks.active
+    when "completed"
+      @tasks = @tasks.completed_tasks
+    end
+
+    @tasks = case params[:sort]
+    when "due_date"
+      @tasks.by_due_date
+    when "priority"
+      @tasks.by_priority_order
+    else
+      @tasks.newest_first
+    end
   end
 
   def show
